@@ -132,7 +132,8 @@ static CGFloat CRCenterXForActivityIndicatorWithAlignment(CRToastAccessoryViewAl
     CGFloat preferredPadding = self.toast.preferredPadding;
     
     CGFloat statusBarYOffset = self.toast.displayUnderStatusBar ? (CRGetStatusBarHeight()+CRStatusBarViewUnderStatusBarYOffsetAdjustment) : 0;
-    contentFrame.size.height = CGRectGetHeight(contentFrame) - statusBarYOffset;
+    statusBarYOffset += preferredPadding;
+    contentFrame.size.height = CGRectGetHeight(contentFrame) - statusBarYOffset - preferredPadding;
     
     self.backgroundView.frame = self.bounds;
     
@@ -289,6 +290,7 @@ static CGFloat CRCenterXForActivityIndicatorWithAlignment(CRToastAccessoryViewAl
     } else {
         _imageView.image = toast.image;
     }
+    _imageView.clipsToBounds = YES;
     _imageView.contentMode = toast.imageContentMode;
     _activityIndicator.activityIndicatorViewStyle = toast.activityIndicatorViewStyle;
     self.backgroundColor = toast.backgroundColor;
